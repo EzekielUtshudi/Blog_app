@@ -7,25 +7,25 @@
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/ BLOG_APP_test</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/BLOG_APP_test</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Rails  BLOG_APP: development" uuid="f42a7e03-2598-4b1f-a408-904a4719b05f">
+    <data-source source="LOCAL" name="Rails BLOG_APP: development" uuid="f42a7e03-2598-4b1f-a408-904a4719b05f">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/ BLOG_APPg_development</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/BLOG_APP_development</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Rails  BLOG_APP: production" uuid="0e709feb-6086-4371-a4b7-4ea4d607088a">
+    <data-source source="LOCAL" name="Rails BLOG_APP: production" uuid="0e709feb-6086-4371-a4b7-4ea4d607088a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/ BLOG_APP_production</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/BLOG_APP_production</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
