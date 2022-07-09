@@ -1,34 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it 'is valid with valid attributes ' do
-    expect(User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                       bio: 'Teacher from Mexico.')).to be_valid
+  it 'User should not be valid without valid attributes' do
+    expect(User.new).to_not be_valid
   end
 
-  it 'is not valid with name empty ' do
-    expect(User.create(name: '', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                       bio: 'Teacher from Mexico.')).to_not be_valid
+  it 'User should not be valid without a name' do
+    person = User.new(name: nil)
+    expect(person).to_not be_valid
   end
 
-  it 'is not valid with posts_counter nil' do
-    expect(User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                       bio: 'Teacher from Mexico.', posts_counter: nil)).to_not be_valid
+  it 'post counter should not be valid without integer' do
+    person = User.new(post_counter: nil)
+    expect(person).to_not be_valid
   end
 
-  it 'is not valid with posts_counter of type string' do
-    expect(User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                       bio: 'Teacher from Mexico.', posts_counter: 'nil')).to_not be_valid
-  end
-
-  it 'should return 3 posts' do
-    author = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                         bio: 'Teacher from Mexico.')
-    Post.create(author:, title: 'Hello', text: 'This is my first post')
-    Post.create(author:, title: 'Hello', text: 'This is my first post')
-    Post.create(author:, title: 'Hello', text: 'This is my first post')
-    Post.create(author:, title: 'Hello', text: 'This is my first post')
-
-    expect(author.three_recent_posts.count).to eq(3)
+  it 'Most recent user returns only three posts' do
+    person = User.most_recent_posts.length
+    expect(person).to be <= 3
   end
 end

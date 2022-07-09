@@ -1,38 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  before :each do
-    @author = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                          bio: 'Teacher from Mexico.')
+  it 'Post should not be valid without valid attributes' do
+    expect(Post.new).to_not be_valid
   end
 
-  it 'is valid with valid attributes' do
-    expect(Post.create(author: @author, title: 'Hello', text: 'This is my first post')).to be_valid
+  it 'Post title should not be empty' do
+    post = Post.new(title: nil)
+    expect(post).to_not be_valid
   end
 
-  it 'is not valid with title empty' do
-    expect(Post.create(author: @author, title: '', text: 'This is my first post')).to_not be_valid
+  it 'Post comment counter should not be a nil' do
+    post = Post.new(comments_counter: nil)
+    expect(post).to_not be_valid
   end
 
-  it 'is not valid with title exceeding 250 characters ' do
-    title = 'r' * 251
-    expect(Post.create(author: @author, title:, text: 'This is my first post')).to_not be_valid
+  it 'Post comment counter should not be a string' do
+    post = Post.new(comments_counter: 'one')
+    expect(post).to_not be_valid
   end
 
-  it 'should update post counter' do
-    Post.create(author: @author, title: 'Hello', text: 'This is my first post')
-    expect(@author.posts_counter).to eq(1)
+  it 'Likes comment counter should not be a nil' do
+    post = Post.new(likes_counter: nil)
+    expect(post).to_not be_valid
   end
 
-  it 'should return five (5) most recent comments' do
-    post = Post.create(author: @author, title: 'Hello', text: 'This is my first post')
-    Comment.create(post:, author: @author, text: 'Hi Tom!')
-    Comment.create(post:, author: @author, text: 'Hi Tom!')
-    Comment.create(post:, author: @author, text: 'Hi Tom!')
-    Comment.create(post:, author: @author, text: 'Hi Tom!')
-    Comment.create(post:, author: @author, text: 'Hi Tom!')
-    Comment.create(post:, author: @author, text: 'Hi Tom!')
+  it 'Likes comment counter should not be a string' do
+    post = Post.new(likes_counter: 'one')
+    expect(post).to_not be_valid
+  end
 
-    expect(post.five_recent_comment.count).to eq(5)
+  it 'Most recent comments returns most recent 5 comments' do
+    comment = Post.most_recent_comments.length
+    expect(comment).to be <= 5
   end
 end
