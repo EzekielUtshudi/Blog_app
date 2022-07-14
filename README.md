@@ -18,47 +18,32 @@
 
 ## Built With
 
-- Ruby on Rails
-- PostgreSQL
+- **Ruby**
+- **Rails**
+- **Postgresql**
+- **CSS**
+
+## Methodology used 
+- TDD via RSPEC
 
 ## Getting Started
-
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
 
-- [Ruby](https://www.ruby-lang.org/en/)
-- [Rails](https://gorails.com/)
+## Prerequisites
 
-### Setup
+- You need Ruby v3+, Rails v7+ and Postgresql installed on your machine.
 
-- Make sure you have Ruby on Rails set up properly on your computer
-- Clone or download this repo on your machine
-- Enter project directory
+## Setup
 
-### Development Database
+- Clone the project `git@github.com:EzekielUtshudi/Blog_app.git`
+- navigate to the folder `cd blog-app`
+- Install required gems `bundle i`
 
-```sh
-# Create user
-sudo -u postgres createuser blog -s
-# Create the database
-rake db:create
-# Create database Migration
-rails db:migrate
-```
+## Usage
+- start the server `rails s`
 
-### Install
-
-```sh
-bundle install
-```
-
-### Run
-
-```sh
-rails s
-```
-
+- Enjoy interacting with the app.
 ### Test
 
 ```sh
