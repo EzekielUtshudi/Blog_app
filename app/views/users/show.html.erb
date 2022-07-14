@@ -1,33 +1,13 @@
-<h2>Here is the detail of a user.</h2>
-<div>
-  <img src="" alt="User avatar">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
+<h1>Details of the user</h1>
+<%= render @user %>
+
+<div class="bio">
+    <h2>Bio</h2>
+    <p><%=@user.bio%></p>
 </div>
 
-<div>
-  <h3>Post One</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
-<div>
-  <h3>Post Two</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
-<div>
-  <h3>Post Three</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
-<div>
-  <h3>Post Four</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
+<%@post.each do |post|%>
+    <%= render post %>
+<%end%>
+
+<button><%= link_to ("See all posts"),user_posts_path(@user.id) %></button>

@@ -1,29 +1,5 @@
-<h2>Here is a list of all users.</h2>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
-</div>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
-</div>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
-</div>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
-</div>
+<h1>List of all users</h1>
+
+<% @user.each do |user| %>
+    <%= render user %>
+<% end %>

@@ -1,39 +1,12 @@
-<h2>This is a list of posts for a user.</h2>
-<div>
-  <img src="" alt="User avatar">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
+<h1>Here is a list of posts for a user</h1>
+<%= render @user %>
+<%@post.each do |post|%>
+<%= render post %>
+<div class='comments'>
+    <%post.last_five_comments.each do |comment|%>
+    <p><%=post.author.name%>: <%=comment.text%></p>
+    <%end%>
 </div>
+<%end%>
 
-<div>
-  <h3>Post One</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
-
-<div>
-  <h3>Username: Comment one</h3>
-  <h3>Username: Comment two</h3>
-  <h3>Username: Comment three</h3>
-  <h3>Username: Comment four</h3>
-  <h3>Username: Comment five</h3>
-</div>
-
-
-<div>
-  <h3>Post Two</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
-
-<div>
-  <h3>Username: Comment one</h3>
-  <h3>Username: Comment two</h3>
-  <h3>Username: Comment three</h3>
-  <h3>Username: Comment four</h3>
-  <h3>Username: Comment five</h3>
-</div>
+<button>Pagination</button>
