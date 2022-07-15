@@ -1,14 +1,9 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get '/', to: 'users#index'
-
-  resources :users, only: %i[index show] do
-    resources :posts, only: %i[index show new create] do
-      resources :comments, only: [:create]
-    end
+  resources :users, only: [:index, :show] do
+    resources :posts, only: [:index, :create, :new, :show] do
+      resources :comments, only: [:create :new]
+      resources :likes, only: [:create, :destroy]
   end
-
-  put 'user/:user_id/post/:id/like', to: 'posts#like', as: 'like'
 end
+
+root to: 'users#index'

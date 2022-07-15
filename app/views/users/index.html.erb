@@ -1,15 +1,9 @@
-<% @users.each do |user| %>
-<div class="user">
-  <div class="profile-image">
-  <img src=<%= user.Photo%> alt=""/>
-  </div>
-  <div class="user-info">
-    <%= link_to "#{user.Name}", "/users/#{user.id}", class: "fs-5" %>
-    <div class="num-posts">
-      <p>Number of posts: <%= !user.PostsCounter ? 0 : user.PostsCounter %> </p>
-    </div>
-  </div>
-</div>
-<% end %>
+<h1>List of users</h1>
 
-  
+<div class="users-list">
+  <% @users.each do |user| %>
+    <%= link_to user do %>
+      <%= render partial: "user_card", locals: { user: user } %>
+    <% end %>
+  <% end %>
+</div>

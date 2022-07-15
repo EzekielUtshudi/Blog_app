@@ -1,26 +1,17 @@
-<div class="user">
-  <div class="profile-image">
-  </div>
-  <div class="user-info">
-    <p class="fs-5"><%= @user.Name %></p>
-    <div class="num-posts">
-      <p>Number of posts: <%= !@user.PostsCounter ? 0 : @user.PostsCounter %> </p>
+<h1>User Details</h1>
+<%= render partial: "user_card" , locals: { user: @user } %>
+  <%= render partial: "bio_card" , locals: { user: @user } %>
+
+    <h2>Last three posts:</h2>
+
+    <div class="card-list">
+      <% @recent_posts.each do |post| %>
+        <%= render partial: "posts/post_card" , locals: { post: post } %>
+          <% end %>
     </div>
-  </div>
-</div>
-<div class="bio">
-  <p class="fs-4">Bio</p>
-  <p><%= @user.Bio %></p>
-</div>
-<% @user.recent_posts.each do |post| %>
-<div class="post">
-  <%= link_to "Post #{post.id}", "/users/#{@user.id}/posts/#{post.id}", class: "fs-5" %>
-  <p><%= post.Text %> </p>
-</div>
-<% end %>
-<div class="see-posts">
-  <%# <button class="btn btn-outline-dark"></button> %>
-  <%= link_to 'See All The Posts', "/users/#{@user.id}/posts" %>
-</div>
 
+    <%= link_to "See all posts" , user_posts_path(@user) if @user.posts_counter> 0 %>
+      <%= link_to "Add a new post" , new_user_post_url(@user) %>
 
+        <%=form_with model: User.new, url: destroy_user_session_path, method: :delete, data: { turbo: false }  do %> <button class="custom-button">Sign out</button>
+          <% end %>

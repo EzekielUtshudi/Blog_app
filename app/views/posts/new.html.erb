@@ -1,7 +1,9 @@
-<div class="form d-md-block">
-<h1>New Post</h1>
-<br>
-<%= render 'form', friend: @post %>
-<br>
-<%= link_to 'Back', user_posts_path, class: 'btn btn-secondary' %>
-</div>
+<h1>Create new post</h1>
+
+<%= form_with model: @post, url: user_posts_url, method: :post, class: 'form' do |f| %>
+  <%= f.label :title, 'Title' %>
+  <%= f.text_field :title %>
+  <%= f.label :text, 'Content' %>
+  <%= f.text_area :text %>
+  <%= f.submit "Save" %>
+<% end %>

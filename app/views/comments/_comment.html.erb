@@ -1,7 +1,0 @@
-<%= form_with model: [@user, @post, @post.comments.build] do |form| %>
-  <%= form.text_area :Text, placeholder: 'Write a comment...', class:"form-control" %>
-  <br>
-  
-  <%= form.submit class: 'btn btn-dark' %>
-  <br>
-<% end %>

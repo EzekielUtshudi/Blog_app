@@ -1,31 +1,35 @@
-<div class="all-post">
-  <div class="post-header">
-    <div class="post-info">
-      <p>Post: #<%= @post.id %></p>
-      <p>By: <%= @user.Name %></p>
+<h1><%= @post.title %></h1>
+<div><em>
+  by
+  <%= link_to user_path(@post.user) do %>
+    <%= @post.user.name-%>
+  <% end %>
+  |
+  <%= render partial: "likes/like_button", locals: { like: Like.new, user: @post.user, post: @post } %>
+  |
+  <span><%= @post.comments_counter || 0 %> Comments</span>
+</em></div>
+<p><%= @post.text %></p>
+
+<hr />
+
+<div class="comments-wrapper">
+  <h3>Comments:</h3>
+  <% if @post.comments.empty? %>
+    <p>There no comment so far!</p>
+  <% end %>
+  <% @post.comments.each do |comment| %>
+    <div class="comment-card">
+      <strong>
+        <%= link_to user_path(comment.user) do %>
+          <%= comment.user.name %>
+        <% end %>
+        :
+      </strong>
+      <%= comment.text %>
     </div>
-    <div class="comments-likes">
-      <p>comments: <%= !@post.CommentsCounter ? 0 : @post.CommentsCounter %></p>
-      <p>Likes: <%= !@post.LikesCounter ? 0 : @post.LikesCounter %></p>
-    </div>
-  </div>
-  <div class="post-text">
-    <p><%= @post.Text %></p>
-  </div>
-  <div>
-  <div class="likes">
-  <i class="far fa-thumbs-up"></i><%= button_to "Like", like_path(@user, @post), method: "put", class: 'btn btn-secondary'%>
-  </div>
-  </div>
-</div>
-<div class="create-comment">
-<%= render 'comments/comment' %>
-</div>
-<div class="comments">
-<% @comments.each do |comment| %>
-  <div class="comment">
-    <p class="user-name"><%= User.find_by(id: comment.Author_id).Name %>: </p>
-    <p class="ml-2"> <%= comment.Text %> </p>
-  </div>
-<% end %>
+  <% end %>
+
+  <h3>Add new comment:</h3>
+  <%= render partial: "comments/comment_form", locals: { comment: Comment.new, user: @post.user, post: @post } %>
 </div>

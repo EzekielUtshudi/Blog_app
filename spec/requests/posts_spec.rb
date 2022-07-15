@@ -1,33 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
-  describe 'GET #index' do
-    before(:example) { get '/users/:user_id/posts' }
-    it 'is a success' do
+  describe 'GET /index' do
+    before(:example) { get '/users/1/posts' }
+    it 'respond with 200 code' do
       expect(response).to have_http_status(:ok)
     end
 
-    it "renders 'index' template" do
-      expect(response).to render_template('index')
+    it 'renders index view' do
+      expect(response).to render_template(:index)
     end
 
-    it 'has a text in the view' do
-      expect(response.body).to include('Find me in app/views/posts/index.html.erb')
+    it 'renders correct content' do
+      expect(response.body).to include('Posts of a given user')
     end
   end
 
-  describe 'GET #show' do
-    before(:example) { get '/users/:user_id/posts/show' }
-    it 'is a success' do
+  describe 'GET /show' do
+    before(:example) { get '/users/1/posts/2' }
+    it 'respond with 200 code' do
       expect(response).to have_http_status(:ok)
     end
 
-    it "renders 'show' template" do
-      expect(response).to render_template('show')
+    it 'renders show view' do
+      expect(response).to render_template(:show)
     end
 
-    it 'has a text in the view' do
-      expect(response.body).to include('Find me in app/views/posts/show.html.erb')
+    it 'renders correct content' do
+      expect(response.body).to include('Specific post of a user')
     end
   end
 end

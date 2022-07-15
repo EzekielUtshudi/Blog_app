@@ -1,16 +1,37 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    post = Post.find(params[:post_id])
+    render json: post.comments
+  end
+
+  def new
+    @comment = Comment.new
+    render :new
+  end
+
   def create
-    @publisher = User.find(params[:user_id])
-    @post = Post.find(params[:post_id])
-    @comment = Comment.new(params[:comment].permit(:Text))
-    @comment.Author_id = current_user.id
-    @comment.post_id = @post.id
-    if @comment.save
-      @comment.update_comments_counter
-      flash[:success] = 'Object successfully created'
-    else
-      flash[:error] = 'Something went wrong'
+    comment_author = current_user
+    post = Post.find(params[:post_id])
+    post_author = post.user
+
+    comment = params[:comment]
+
+    new_comment = Comment.new(comment.permit(:text))
+    new_comment.post = post
+    new_comment.user = comment_author
+
+    return unless new_comment.save
+
+    respond_to do |format|
+      format.html do
+        flash[:notice] = 'You commented.'
+        redirect_to user_post_url(post_author, post)
+      end
+      format.json do
+        render json: new_comment
+      end
     end
-    redirect_to user_post_path(@publisher, @post)
   end
 end
