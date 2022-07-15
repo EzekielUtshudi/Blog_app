@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CommentsController < ApplicationController
   def create
     @publisher = User.find(params[:user_id])
