@@ -1,29 +1,9 @@
-<h2>Here is a list of all users.</h2>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
-</div>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
-</div>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
-</div>
-<div>
-  <img src="" alt="user image">
-  <div>
-    <h3>Username</h3>
-    <h4>Number of posts: X</h4>
-  </div>
+<h1>List of users</h1>
+
+<div class="users-list">
+  <% @users.each do |user| %>
+    <%= link_to user do %>
+      <%= render partial: "user_card", locals: { user: user } %>
+    <% end %>
+  <% end %>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blogapp</title>
+    <title>RailsBlog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <main>
     <%= yield %>
+    </main>
+
+    <div id="flashes">
+      <% flash.each do |name, msg| -%>
+        <%= render partial: "others/flash", locals: {name: name, msg: msg} %>
+      <% end -%>
+    </div>
   </body>
 </html>

@@ -1,0 +1,23 @@
+<div class="post-card">
+  <%= link_to user_post_path(post.user, post) do %>
+    <h3><%= post.title%></h3>
+  <% end %>
+  <p><%= post.text.length > 100 ? post.text.first(100) + '...' : post.text %></p>
+  <div class="post-card-meta">
+    <%= render partial: "likes/like_button", locals: { like: Like.new, user: post.user, post: post } %>
+    |
+    <span><%= post.comments_counter || 0 %> Comments</span>
+  </div>
+
+  <% if local_assigns.include?(:comments) && comments.present? %>
+    <div class="comments-wrapper">
+      <h4>Recent comments:</h4>
+      <% comments.each do |comment| %>
+        <div class="comment-card">
+          <strong><%= comment.user.name %>:</strong>
+          <%= comment.text %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
