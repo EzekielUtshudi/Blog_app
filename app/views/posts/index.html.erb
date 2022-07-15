@@ -1,17 +1,33 @@
-<div class='container mt-3'>
-
-  <h1>Here is a list of posts for a user</h1>
-  <%= render @user %>
-  <%@post.each do |post|%>
-  <%= render post %>
-  <div class='comments'>
-    <%post.last_five_comments.each do |comment|%>
-    <p><%=post.author.name%>: <%=comment.text%></p>
-    <%end%>
+<div class="user">
+  <div class="profile-image">
   </div>
-  <%end%>
-  <p>
-    <button class="btn btn-outline-dark">Pagination</button>
-  </p>  
-
+  <div class="user-info">
+    <p class="fs-5"><%= @user.Name %></p>
+    <div class="num-posts">
+      <p>Number of posts: <%= !@user.PostsCounter ? 0 : @user.PostsCounter %> </p>
+    </div>
+  </div>
 </div>
+<div class="user">
+<%= link_to 'New Post', new_user_post_path, class: 'btn btn-secondary' %>
+</div>
+<% @posts.each do |post| %>
+<div class="post-with-comments">
+  <%= link_to "Post #{post.id}", "/users/#{@user.id}/posts/#{post.id}", class: "fs-5" %>
+  <p><%= post.Text %> </p>
+  <div class="likes-comments">
+      <p>comments: <%= !post.CommentsCounter ? 0 : post.CommentsCounter %></p>
+      <p>Likes: <%= !post.LikesCounter ? 0 : post.LikesCounter %></p>
+  </div>
+</div>
+<div class="comments">
+<h6>Comments:</h6>
+<% post.recent_comments.each do |comment| %>
+  <div class="comment">
+    <p class="user-name"><%= User.find_by(id: comment.Author_id).Name %>: </p>
+    <p class="ml-2"> <%= comment.Text %> </p>
+  </div>
+<% end %>
+</div>
+<% end %>
+

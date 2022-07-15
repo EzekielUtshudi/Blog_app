@@ -1,16 +1,31 @@
-<div class='container mt-4'>
-  <h1>Here are details of a user's post</h1>
-  <div class="posts">
-    <div class="post_comments">
-      <h4><%=@post.title%> by: <%=@post.author.name%></h4>
-      <span>Comments: <%=@post.comments_counter%>, Likes: <%=@post.likes_counter%></span>
+<div class="all-post">
+  <div class="post-header">
+    <div class="post-info">
+      <p>Post: #<%= @post.id %></p>
+      <p>By: <%= @user.Name %></p>
     </div>
-    <p><%=@post.text%></p>
+    <div class="comments-likes">
+      <p>comments: <%= !@post.CommentsCounter ? 0 : @post.CommentsCounter %></p>
+      <p>Likes: <%= !@post.LikesCounter ? 0 : @post.LikesCounter %></p>
+    </div>
   </div>
-
-  <div class= "comments">
-    <%@post.comments.each do |comment|%>
-     <p><%= comment.author.name %>: <%=comment.text%></p>
-    <%end%>
+  <div class="post-text">
+    <p><%= @post.Text %></p>
   </div>
+  <div>
+  <div class="likes">
+  <i class="far fa-thumbs-up"></i><%= button_to "Like", like_path(@user, @post), method: "put", class: 'btn btn-secondary'%>
+  </div>
+  </div>
+</div>
+<div class="create-comment">
+<%= render 'comments/comment' %>
+</div>
+<div class="comments">
+<% @comments.each do |comment| %>
+  <div class="comment">
+    <p class="user-name"><%= User.find_by(id: comment.Author_id).Name %>: </p>
+    <p class="ml-2"> <%= comment.Text %> </p>
+  </div>
+<% end %>
 </div>

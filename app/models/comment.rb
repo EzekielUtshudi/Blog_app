@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class Comment < ApplicationRecord
-  belongs_to :author, class_name: 'User', foreign_key: :author_id
-  belongs_to :post, class_name: 'Post'
-
-  validates :text, presence: true, length: { in: 3..250 }
-
-  after_save :update_comments_counter
-
+  belongs_to :Author, class_name: 'User'
+  belongs_to :post
   def update_comments_counter
-    post.update(comments_counter: post.comments.count)
+    if post.CommentsCounter.nil?
+      post.update(CommentsCounter: 1)
+    else
+      post.CommentsCounter += 1
+      post.update(CommentsCounter: post.CommentsCounter)
+    end
   end
 end

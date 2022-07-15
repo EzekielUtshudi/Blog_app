@@ -1,10 +1,15 @@
-class Like < ApplicationRecord
-  belongs_to :author, class_name: 'User', foreign_key: :author_id
-  belongs_to :post, class_name: 'Post'
+# frozen_string_literal: true
 
-  after_save :update_likes_counter
+class Like < ApplicationRecord
+  belongs_to :Author, class_name: 'User'
+  belongs_to :post
 
   def update_likes_counter
-    post.update(likes_counter: post.likes.count)
+    if post.LikesCounter.nil?
+      post.update(LikesCounter: 1)
+    else
+      post.LikesCounter += 1
+      post.update(LikesCounter: post.LikesCounter)
+    end
   end
 end
