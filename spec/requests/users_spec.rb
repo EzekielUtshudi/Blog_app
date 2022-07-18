@@ -34,12 +34,4 @@ RSpec.describe 'Users', type: :request do
       expect(response.body).to include('See all posts')
     end
   end
-
-  # describe 'index page' do
-  #   it 'shows the right content' do
-  #     visit users_path
-  #     sleep(5)
-  #     expect(page).to have_content('All users')
-  #   end
-  # end
 end
