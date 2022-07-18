@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
   describe 'GET index' do
-    before(:each) { get '/users/:user_id/posts' }
+    before(:each) { get '/users/1/posts' }
 
     it 'Should be 200' do
       expect(response).to have_http_status(:ok)
@@ -15,12 +15,12 @@ RSpec.describe 'Posts', type: :request do
     end
 
     it 'should test placeholder text inside template' do
-      expect(response.body).to include('Show all posts of a user')
+      expect(response.body).to include('Pagination')
     end
   end
 
   describe 'GET show' do
-    before(:each) { get '/users/:user_id/posts/60' }
+    before(:each) { get '/users/1/posts/1' }
 
     it 'Should be 200' do
       expect(response).to have_http_status(:ok)
@@ -31,7 +31,7 @@ RSpec.describe 'Posts', type: :request do
     end
 
     it 'should test placeholder text inside template' do
-      expect(response.body).to include('Show post info')
+      expect(response.body).to include('Comments')
     end
   end
 end

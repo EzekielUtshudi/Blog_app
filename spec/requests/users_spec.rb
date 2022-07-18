@@ -15,12 +15,12 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'should test placeholder text inside template' do
-      expect(response.body).to include('Show all users')
+      expect(response.body).to include('Number of posts')
     end
   end
 
   describe 'GET show' do
-    before(:each) { get '/users/25' }
+    before(:each) { get '/users/1' }
 
     it 'Should be 200' do
       expect(response).to have_http_status(:ok)
@@ -31,7 +31,15 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'should test placeholder text inside template' do
-      expect(response.body).to include('Show users info')
+      expect(response.body).to include('See all posts')
     end
   end
+
+  # describe 'index page' do
+  #   it 'shows the right content' do
+  #     visit users_path
+  #     sleep(5)
+  #     expect(page).to have_content('All users')
+  #   end
+  # end
 end
