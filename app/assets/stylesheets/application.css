@@ -1,156 +1,142 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* Users-index */
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: #f7f7f7;
-  padding: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-main {
+.users-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  max-width: 768px;
-  margin-inline: auto;
+  align-items: center;
 }
 
-.card {
-  overflow: hidden;
-  border: 1px solid #eee;
-  border-radius: 1rem;
-  box-shadow: 0 0.1rem 0.5rem #0001;
-  padding: 1rem;
-  background: white;
+.text-dec {
+  text-decoration: none;
 }
 
-.card-list {
+.users-heading {
+  font-size: 20px;
+}
+
+.user-box {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.user-img {
+  width: 200px;
+}
+
+.user-info-box {
+  display: flex;
+  gap: 50px;
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+.user-name {
+  font-size: 20px;
+}
+
+.user-post-count {
+  font-size: 15px;
+}
+
+/* user-show */
+
+.user-show-c {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
 }
 
-.users-list {
+.user-bio {
+  border: 2px solid #000;
+  width: 400px;
+  text-align: center;
+  padding: 20px;
+}
+
+.user-recent-post {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  border: 2px solid #000;
+  margin-bottom: 20px;
+  width: 400px;
 }
 
-.user-card {
-  display: flex;
-  overflow: hidden;
-  border: 1px solid #eee;
-  border-radius: 1rem;
-  box-shadow: 0 0.1rem 0.5rem #0001;
-  background: white;
+.user-post-counters {
+  align-self: flex-end;
 }
 
-.user-image {
-  width: 8rem;
-  height: 8rem;
-  object-fit: cover;
-}
+/* posts-index */
 
-.user-detail {
-  padding: 1rem;
+.posts-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
-.post-card {
+.posts-info {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  overflow: hidden;
-  border: 1px solid #eee;
-  border-radius: 1rem;
-  box-shadow: 0 0.1rem 0.5rem #0001;
-  padding: 1rem;
-  background: white;
+  border: 2px solid #000;
+  margin-bottom: 20px;
+  width: 400px;
 }
 
-.comments-wrapper {
+.post-comments {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background-color: #eee;
-  padding: 1rem;
-  color: #444;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
+  border: 2px solid #000;
+  margin-bottom: 20px;
+  width: 400px;
 }
 
-.comment-card {
-  background-color: #f7f7f7;
-  padding: 0.5rem;
-  box-shadow: 2px 2px 2px #0001;
-  border-radius: 0.5rem;
-}
+/* post-show */
 
-.inline {
-  display: inline;
-}
-
-.like-button {
-  border: 0;
-  background: none;
-  font-size: inherit;
-  cursor: pointer;
-}
-
-#flashes {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
+.post-show-c {
   display: flex;
-  align-items: end;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
 }
 
-.flash {
-  background: #eee;
-  padding: 1rem;
-  border: 1px solid #0003;
-  border-radius: 0.5rem;
+.post-inf-box {
+  display: flex;
+  justify-content: space-between;
 }
 
-.flash-notice {
-  background-color: lightgreen;
+/* post-new */
+
+.create-post-c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.flash-error {
-  background-color: lightcoral;
+.post-form-c {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.action-button {
-  padding: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
+.post-title-c,
+.post-text-c {
+  padding: 20px;
+  width: 400px;
 }
 
-.action-icon {
-  width: 1rem;
-  height: 1rem;
+.submit-btn {
+  padding: 10px;
+}
+
+/* add-comment */
+
+.add-comment-c {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comment-text-c {
+  padding: 20px;
+  width: 400px;
 }

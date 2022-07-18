@@ -1,33 +1,37 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
-  describe 'GET /index' do
-    before(:example) { get '/users/1/posts' }
-    it 'respond with 200 code' do
+  describe 'GET index' do
+    before(:each) { get '/users/:user_id/posts' }
+
+    it 'Should be 200' do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'renders index view' do
-      expect(response).to render_template(:index)
+    it 'should render a template' do
+      expect(response).to render_template('posts/index')
     end
 
-    it 'renders correct content' do
-      expect(response.body).to include('Posts of a given user')
+    it 'should test placeholder text inside template' do
+      expect(response.body).to include('Show all posts of a user')
     end
   end
 
-  describe 'GET /show' do
-    before(:example) { get '/users/1/posts/2' }
-    it 'respond with 200 code' do
+  describe 'GET show' do
+    before(:each) { get '/users/:user_id/posts/60' }
+
+    it 'Should be 200' do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'renders show view' do
-      expect(response).to render_template(:show)
+    it 'should render a template' do
+      expect(response).to render_template('posts/show')
     end
 
-    it 'renders correct content' do
-      expect(response.body).to include('Specific post of a user')
+    it 'should test placeholder text inside template' do
+      expect(response.body).to include('Show post info')
     end
   end
 end

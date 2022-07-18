@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 class Comment < ApplicationRecord
-  belongs_to :user
+  belongs_to :author, class_name: 'User'
   belongs_to :post
+  after_save :update_comments_counter
+
+  private
 
   def update_comments_counter
-    post.update(comments_counter: post.comments.count)
+    post.increment!(:comments_counter)
   end
 end

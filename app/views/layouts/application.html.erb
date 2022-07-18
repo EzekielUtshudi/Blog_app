@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsBlog</title>
+    <title>BlogApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <main>
-    <%= yield %>
-    </main>
-
-    <div id="flashes">
-      <% flash.each do |name, msg| -%>
-        <%= render partial: "others/flash", locals: {name: name, msg: msg} %>
-      <% end -%>
-    </div>
+  <% if notice %>
+  <p><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p><%= alert %></p>
+<% end %>
+      <%= yield %>
   </body>
 </html>
