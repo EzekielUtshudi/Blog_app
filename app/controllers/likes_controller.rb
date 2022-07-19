@@ -1,16 +1,13 @@
-# frozen_string_literal: true
-
 class LikesController < ApplicationController
   def create
-    @post = Post.find(params[:post_id])
-    new_like = current_user.likes.new(
-      author_id: current_user.id,
-      post_id: @post.id
-    )
-    if new_like.save
-      redirect_to "/users/#{@post.author_id}/posts/#{@post.id}", flash: { alert: 'Your like is saved' }
+    like = Like.new(author: current_user, post: current_post)
+    # redirect_to user_post_url(current_user, current_post)
+    if like.save
+      flash[:notice] = 'You liked the post.'
+      redirect_to user_post_url(current_user, current_post)
     else
-      redirect_to "/users/#{@post.author_id}/posts/#{@post.id}", flash.now[:error] = 'Could not save like'
+      flash[:alert] = 'Cant like twice, silly.'
+      redirect_to { new_user_post(current_user) }
     end
   end
 end

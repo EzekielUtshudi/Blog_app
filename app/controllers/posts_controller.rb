@@ -1,32 +1,31 @@
-# frozen_string_literal: true
-
 class PostsController < ApplicationController
   def index
-    @user = User.find(params[:user_id])
+    @user = current_user
     @posts = @user.posts.includes(:comments)
+  end
+
+  def new
+    @new_post = Post.new
+  end
+
+  def create
+    puts params
+    user = current_user
+    post = Post.new(post_params)
+    post.author = user
+    post.comments_counter = 0
+    post.likes_counter = 0
+    if post.save
+      flash[:notice] = 'Your post has been saved'
+      redirect_to user_posts_url
+    else
+      flash[:alert] = 'Your comment has been saved'
+      redirect_to new_user_post_url(user_id: user.id)
+    end
   end
 
   def show
     @post = Post.find(params[:id])
-    @user = @post.author
-    @comments = @post.comments
-  end
-
-  def new
-    @post = Post.new
-  end
-
-  def create
-    @new_post = current_user.posts.new(post_params)
-    respond_to do |format|
-      format.html do
-        if @new_post.save
-          redirect_to "/users/#{@new_post.author.id}/posts/", flash: { alert: 'Your post is saved' }
-        else
-          redirect_to "/users/#{@new_post.author.id}/posts/new", flash: { alert: 'Could not save post' }
-        end
-      end
-    end
   end
 
   private

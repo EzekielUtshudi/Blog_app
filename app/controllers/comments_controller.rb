@@ -1,29 +1,27 @@
-# frozen_string_literal: true
-
 class CommentsController < ApplicationController
   def new
     @comment = Comment.new
+    @user = current_user
   end
 
   def create
-    @post = Post.find(params[:post_id])
-    @new_comment = current_user.comments.new(
-      text: comment_params,
-      author_id: current_user.id,
-      post_id: @post.id
-    )
-    @new_comment.post_id = @post.id
-    if @new_comment.save
-      redirect_to "/users/#{@post.author_id}/posts/#{@post.id}", flash: { alert: 'Your comment is saved' }
+    user = current_user
+    post = current_post
+    comment = Comment.new(comment_params)
+    comment.author = user
+    comment.post = post
+    if comment.save
+      flash[:notice] = 'Your comment has been saved'
+      redirect_to user_post_url(id: post.id)
     else
-      flash.now[:error] = 'Could not save comment'
-      render action: 'new'
+      flash[:alert] = 'Comment was not saved!'
+      redirect_to new_user_post_comment_url(post_id: post.id, user_id: user.id)
     end
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:text)[:text]
+    params.require(:comment).permit(:text)
   end
 end
