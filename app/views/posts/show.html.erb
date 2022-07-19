@@ -1,35 +1,23 @@
-<h1><%= @post.title %></h1>
-<div><em>
-  by
-  <%= link_to user_path(@post.user) do %>
-    <%= @post.user.name-%>
-  <% end %>
-  |
-  <%= render partial: "likes/like_button", locals: { like: Like.new, user: @post.user, post: @post } %>
-  |
-  <span><%= @post.comments_counter || 0 %> Comments</span>
-</em></div>
-<p><%= @post.text %></p>
+<div class="post-show-c">
 
-<hr />
+  <div class="user-recent-post">
+  <div class="post-inf-box">
+  <h2 class="user-post-title">Post : <%= @post.title %> by <%= @user.name %></h2>
+  <h3>Comments: <%= @post.comments_counter%>, Likes: <%= @post.like_counter %><h3>
+  </div>
+  <p class="user-post-text"><%= @post.text %></p>
 
-<div class="comments-wrapper">
-  <h3>Comments:</h3>
-  <% if @post.comments.empty? %>
-    <p>There no comment so far!</p>
+  <%= form_with url: "/users/#{@post.author_id}/posts/#{@post.id}/likes", scope: :like do |form| %>
+    <%= form.submit "Like ", class: "post-like-btns"%>
+    
   <% end %>
-  <% @post.comments.each do |comment| %>
-    <div class="comment-card">
-      <strong>
-        <%= link_to user_path(comment.user) do %>
-          <%= comment.user.name %>
-        <% end %>
-        :
-      </strong>
-      <%= comment.text %>
-    </div>
-  <% end %>
+  </div>
 
-  <h3>Add new comment:</h3>
-  <%= render partial: "comments/comment_form", locals: { comment: Comment.new, user: @post.user, post: @post } %>
+  <div class="post-comments">
+  <% @comments.each do |comment|%>
+    <h3><%= comment.author.name %><%= comment.text %></h3>
+    <% end %>
+  </div>
+
+  <%= render partial: "add_comments", local: { post: @post } %>
 </div>

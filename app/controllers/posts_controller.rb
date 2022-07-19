@@ -1,37 +1,37 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:user).where(user: params[:user_id])
-    respond_to do |format|
-      format.html
-      format.json { render json: @posts }
-    end
+    @user = User.find(params[:user_id])
+    @posts = @user.posts.includes(:comments)
   end
 
-  def create
-    post = params[:post]
-    user = current_user
-
-    new_post = Post.new(post.permit(:title, :text))
-    new_post.comments_counter = 0
-    new_post.likes_counter = 0
-    new_post.user = user
-
-    if new_post.save
-      flash[:notice] = 'New post created successfully.'
-      redirect_to user_post_url(user, new_post)
-    else
-      flash[:error] = 'Creating new post failed!'
-      @post = new_post
-      render :new
-    end
+  def show
+    @post = Post.find(params[:id])
+    @user = @post.author
+    @comments = @post.comments
   end
 
   def new
     @post = Post.new
-    render :new
   end
 
-  def show
-    @post = Post.includes(:user, comments: [:user]).find(params[:id])
+  def create
+    @new_post = current_user.posts.new(post_params)
+    respond_to do |format|
+      format.html do
+        if @new_post.save
+          redirect_to "/users/#{@new_post.author.id}/posts/", flash: { alert: 'Your post is saved' }
+        else
+          redirect_to "/users/#{@new_post.author.id}/posts/new", flash: { alert: 'Could not save post' }
+        end
+      end
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :text)
   end
 end
