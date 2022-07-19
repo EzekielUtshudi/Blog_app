@@ -13,8 +13,11 @@
   <body>
 
   <%= yield %>
-    <% flash.each do |name, message| %>
-    <div class="<%= name %>"><%= message %></div>
-    <% end %>
+      <p class="notice">
+        <% flash.each do |name, message| %>
+        <div class="<%= name %>"><%= User created successfully %></div>
+         <% end %>
+      </p>
+      <p class="alert"><%= alert %></p>
   </body>
 </html>
