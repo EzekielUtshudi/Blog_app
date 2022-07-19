@@ -1,9 +1,25 @@
-<% if @posts.present? %>
-<%= render(partial: 'users/user_card', locals: {user: @posts.first.user}) %>
-<% else %>
-This user doesn't have any post yet!
-<% end %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>user post</title>
+</head>
+<body>
+<section class="posts">
+  <img class="image" src="<%=@user.photo%>" alt="user_image" />
+  <div class="deets">
+    <h2><%= @user.name%> </h2>
+    <p>Number of posts: <%= @user.posts_counter%> </p>
+  </div> 
+</section>
 
-<% @posts.each do |post| %>
-  <%= render partial: 'post_card', locals: { post: post, comments: post.recent_five_comments} %>
-<% end %>
+<section class="user-container">
+  <% @posts.includes(:comments).each do |post| %>
+    <%= render partial: 'post', locals: {post: post} %>
+  <% end %>
+  <%= link_to new_user_post_path do %>
+  <button class="btn">Create post</button>
+  <%end%>
+</section> 
+</body>
+</html>

@@ -27,8 +27,18 @@
 - TDD via RSPEC
 
 ## Getting Started
-To get a local copy up and running follow these simple example steps.
-
+- clone the repository
+`git clone https://github.com/EzekielUtshudi/Blog_app.git`
+- navigate to the folder
+`cd BlogApp`
+- checkout the feature
+`git checkout process-data`
+- Install packages
+`bundle install`
+- Setup database
+`rails db:setup`
+- Run migration
+`rails db:migrate`
 
 ## Prerequisites
 
@@ -54,7 +64,7 @@ rails db:seed
 
 
 
-## Author
+## Authors
 
 👤 **Ezekiel Utshudi**
 
@@ -62,6 +72,11 @@ rails db:seed
 - Twitter: [@UtshudiEzekiel](https://twitter.com/UtshudiEzekiel)
 - LinkedIn: [@ezekiel-utshudi](https://www.linkedin.com/in/ezekiel-utshudi-195782162/)
 
+👤 **Selma Belhadj**
+
+- GitHub: [@selma-belhadj](https://github.com/selma-belhadj)
+- Twitter: [@Bel_Selma16](https://twitter.com/Bel_Selma16)
+- LinkedIn: [@selma-belhadj](https://www.linkedin.com/in/selma-belhadj/)
 
 
 ## 🤝 Contributing
