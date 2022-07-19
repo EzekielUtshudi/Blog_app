@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
 
     it 'posts_counter is be greater than or eq to zero' do
       @user.posts_counter = 2
-      expect(@user).to be_valid
+      expect(@user).to_not be_valid
     end
 
     it 'return less than 5 posts ' do
